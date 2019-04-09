@@ -28,3 +28,11 @@ CREATE TABLE  links (
   created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
   CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+ALTER TABLE links
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE links
+  MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+
+DESCRIBE links;
