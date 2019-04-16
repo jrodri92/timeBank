@@ -36,6 +36,7 @@ router.get('/edit/:id', async (req, res) => {
   res.render('links/edit', {link: links[0]});
 });
 
+
 router.post('/edit/:id', async(req, res) => {
   const { id } = req.params;
   const { title, description, url} = req.body;
