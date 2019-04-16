@@ -46,7 +46,7 @@ router.post('/edit/:id', async(req, res) => {
     url
   };
   console.log(newLink);
-  await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
+  await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id]);
   res.redirect('/links');
 });
 module.exports = router;
