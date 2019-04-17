@@ -9,8 +9,8 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', passport.authenticate('local.signup', {
   successRedirect: '/profile',
-    failureRedirect: '/signup',
-    failureFlash: true
+  failureRedirect: '/signup',
+  failureFlash: true
 }));
 
 router.get('/profile',(req, res) => {
