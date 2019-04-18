@@ -50,6 +50,7 @@ app.use((req, res, next) => {
 app.use(require('./routes/index.js'))
 app.use(require('./routes/authentication.js'))
 app.use('/links', require('./routes/links.js'))
+app.use('/ofertas', require('./routes/ofertas.js'))
 
 //public
 app.use(express.static(path.join(__dirname, 'public')));
