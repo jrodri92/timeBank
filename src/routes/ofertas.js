@@ -3,6 +3,7 @@ const router = express.Router();
 
 const pool = require('../database')
 const {isLoggedin} = require('../lib/auth');
+
 router.get('/misofertas/add', (req, res)=>{
   res.render('ofertas/add');
 });
@@ -42,6 +43,7 @@ router.get('/misofertas/delete/:id',isLoggedin, async (req, res) => {
 router.get('/misofertas/edit/:id',isLoggedin, async (req, res) => {
   const { id } = req.params;
   const ofertas = await pool.query('SELECT * FROM oferta WHERE id_oferta = ?', [id]);
+  console.log(ofertas);
   res.render('ofertas/edit', {oferta: ofertas[0]});
 });
 
@@ -56,6 +58,14 @@ router.post('/misofertas/edit/:id',isLoggedin, async(req, res) => {
   await pool.query('UPDATE oferta set ? WHERE id_oferta = ?', [newLink, id]);
   req.flash('success', 'link updated successfully');
   res.redirect('/ofertas/misofertas');
+});
+
+
+router.get('/perfilofertante/:id', isLoggedin, async (req, res) => {
+  const { id } = req.params
+  const perfil = await pool.query('SELECT * FROM users WHERE id =  ?', [id]);
+  console.log(perfil[0]);
+  res.render('ofertas/perfilOfertante', {perfil: perfil[0]});
 });
 
 module.exports = router;
