@@ -29,24 +29,33 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, username, password, done) => {
-    const { fullname } = req.body;
+    const { cedula, nombres,apellidos, email, 
+        fechaNacimineto,telefono,celular,
+        user_description,frase } = req.body;
     const newUser = {
-        username,
-        password,
-        fullname
+        cedula,nombres,apellidos,
+        username,password,email,
+        fechaNacimineto,telefono,
+        celular,user_description,frase
     };
     newUser.password = await helpers.encryptPassword(password);
+    console.log(req.body);
     const result = await pool.query('INSERT INTO usuarios SET ?', [newUser]);
-    newUser.id = result.insertId;
+    console.log(result);
+    newUser.id_usuario = result.insertId;
     return done(null, newUser);
 
 }));
 
-passport.serializeUser((user, done) => {
-    done(null,user.id);
+passport.serializeUser((usuario, done) => {
+    console.log("serial");
+    console.log(usuario);
+    done(null,usuario.id_usuario);
 });
 
-passport.deserializeUser(async (id, done) => {
-    const rows = await pool.query('SELECT * FROM usuarios WHERE id_usuario = ?',[id]); 
+passport.deserializeUser(async (id_usuario, done) => {
+    console.log("desserial");
+    console.log(id_usuario);
+    const rows = await pool.query('SELECT * FROM usuarios WHERE id_usuario = ?',[id_usuario]); 
     done(null, rows[0]);
 });

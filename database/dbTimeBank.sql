@@ -9,7 +9,8 @@ use timeitBank;
 
 -- creating tables
 CREATE TABLE usuarios (
-  id_usuario INT NOT NULL, 
+  id_usuario INT NOT NULL AUTO_INCREMENT, 
+  cedula INT NOT NULL,
   nombres VARCHAR(45) NOT NULL,
   apellidos VARCHAR(45) NOT NULL,
   username VARCHAR(45) NOT NULL,
@@ -22,6 +23,8 @@ CREATE TABLE usuarios (
   frase VARCHAR(100) NOT NULL, 
   PRIMARY KEY (id_usuario)
 );
+ALTER TABLE usuarios
+  MODIFY id_usuario INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
 
 
 CREATE TABLE  ofertas (
