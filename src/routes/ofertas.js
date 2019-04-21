@@ -13,7 +13,7 @@ router.post('/misofertas/add',isLoggedin, async (req,res) =>{
   const newLink = {
     nombre_oferta, 
     oferta_descripcion,
-    id_usuario: req.user.id
+    id_usuario: req.user.id_usuario
   };
   console.log(newLink);
   await pool.query('INSERT INTO ofertas set ?', [newLink]);
@@ -23,20 +23,19 @@ router.post('/misofertas/add',isLoggedin, async (req,res) =>{
 
 
 router.get('/', isLoggedin, async (req, res) => {
-  const ofertas = await pool.query('SELECT * FROM ofertas WHERE id_usuario <> ?',[req.user.id]);
+  const ofertas = await pool.query('SELECT * FROM ofertas WHERE id_usuario <> ?',[req.user.id_usuario]);
   res.render('ofertas/listOfertas', { ofertas });
 });
 
 router.get('/misofertas', isLoggedin, async (req, res) => {
-    const ofertas = await pool.query('SELECT * FROM ofertas WHERE id_usuario = ?',[req.user.id]);
+    const ofertas = await pool.query('SELECT * FROM ofertas WHERE id_usuario = ?',[req.user.id_usuario]);
     res.render('ofertas/listMisOfertas', { ofertas });
   });
 
 
 router.get('/misofertas/delete/:id',isLoggedin, async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
-  await pool.query('DELETE FROM ofertas WHERE id_ofertas = ?', [id]);
+  await pool.query('DELETE FROM ofertas WHERE id_oferta = ?', [id]);
   req.flash('success', 'Links Removed successfully');
   res.redirect('/ofertas/misofertas'); 
 });
@@ -44,7 +43,6 @@ router.get('/misofertas/delete/:id',isLoggedin, async (req, res) => {
 router.get('/misofertas/edit/:id',isLoggedin, async (req, res) => {
   const { id } = req.params;
   const ofertas = await pool.query('SELECT * FROM ofertas WHERE id_oferta = ?', [id]);
-  console.log(ofertas);
   res.render('ofertas/edit', {oferta: ofertas[0]});
 });
 
@@ -52,9 +50,10 @@ router.get('/misofertas/edit/:id',isLoggedin, async (req, res) => {
 router.post('/misofertas/edit/:id',isLoggedin, async(req, res) => {
   const { id } = req.params;
   const { nombre_oferta, descripcion } = req.body;
+  console.log(req.body);
   const newLink = {
     nombre_oferta, 
-    descripcion,
+    "oferta_descripcion": descripcion,
   };
   await pool.query('UPDATE ofertas set ? WHERE id_oferta = ?', [newLink, id]);
   req.flash('success', 'link updated successfully');
