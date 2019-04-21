@@ -1,7 +1,9 @@
 body{
+    padding-top: 70px;
     background: #f5f6f5;
     font-family: 'Oswald', sans-serif;
-    overflow: hidden;
+    overflow: auto;
+    
 
 }
 
@@ -22,6 +24,7 @@ body{
     background-size:  cover;
 }
 
+
 /* PERFIL OFERTANTE */
 
 /*
@@ -30,8 +33,8 @@ body{
 }
 */
 .portfolio{
-    padding:6%;
-    text-align:center;
+    padding:1%;
+    text-align:center;    
 }
 .heading{
     background: #fff;
@@ -61,6 +64,10 @@ body{
     text-align:left;
 }
 .bio-content p{
-    font-weight:600;
+    font-weight:300;
     font-size:30px;
+}
+
+.bio-scroll {
+    overflow: scroll;
 }

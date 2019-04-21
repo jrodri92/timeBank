@@ -61,11 +61,12 @@ router.post('/misofertas/edit/:id',isLoggedin, async(req, res) => {
 });
 
 
-router.get('/perfilofertante/:id', isLoggedin, async (req, res) => {
+router.get('/perfilofertante/:id/:idO', isLoggedin, async (req, res) => {
   const { id } = req.params
+  const { idO } = req.params 
   const perfil = await pool.query('SELECT * FROM users WHERE id =  ?', [id]);
-  console.log(perfil[0]);
-  res.render('ofertas/perfilOfertante', {perfil: perfil[0]});
+  const oferta = await pool.query('SELECT * FROM oferta WHERE id_oferta = ?', [idO]);
+  res.render('ofertas/perfilOfertante', {perfil: perfil[0] , oferta:oferta[0]});
 });
 
 module.exports = router;
