@@ -11,7 +11,7 @@
                   {{nombre_oferta}}
                 </h3>
               </a>
-              <p class="m-2">{{descripcion}}</p>
+              <p class="m-2">{{oferta_descripcion}}</p>
               <p>{{timeago fechaCreacion}}</p>
               <a href="/ofertas/perfilofertante/{{id_usuario}}/{{id_oferta}}" class="btn btn-danger">Ver más</a>
               <a href="/ofertas/edit/{{id}}" class="btn btn-secondary">Solicitar</a>
@@ -21,8 +21,8 @@
     {{else}}
       <div class="col-md-4 mx-auto">
         <div class="card card-body text-center">
-          <p> No hay links aun </p>
-          <a href="/ofertas/add"> Crea uno! </a>
+          <p> No hay ofertas todavia para ti </p>
+          <!-- <a href="/ofertas/add"> Crea uno! </a> -->
         </div>
       </div>
     {{/each}}

@@ -8,7 +8,7 @@ CREATE TABLE users (
   username VARCHAR(16) NOT NULL,
   password VARCHAR(60) NOT NULL,
   fullname VARCHAR(100) NOT NULL
-  userdescription VARCHAR(400),
+  user_description VARCHAR(400),
   frase VARCHAR(100)
 );
 
