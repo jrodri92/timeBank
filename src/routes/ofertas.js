@@ -9,12 +9,13 @@ router.get('/misofertas/add', (req, res)=>{
 });
 
 router.post('/misofertas/add',isLoggedin, async (req,res) =>{
-  const { nombre_oferta, descripcion } = req.body;
+  const { nombre_oferta, oferta_descripcion } = req.body;
   const newLink = {
     nombre_oferta, 
-    descripcion,
+    oferta_descripcion,
     id_usuario: req.user.id
   };
+  console.log(newLink);
   await pool.query('INSERT INTO ofertas set ?', [newLink]);
   req.flash('success', 'oferta saved successfully');
   res.redirect('/ofertas/misofertas');
