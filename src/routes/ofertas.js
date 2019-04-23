@@ -21,7 +21,6 @@ router.post('/misofertas/add',isLoggedin, async (req,res) =>{
   res.redirect('/ofertas/misofertas');
 });
 
-
 router.get('/', isLoggedin, async (req, res) => {
   const ofertas = await pool.query('SELECT * FROM ofertas WHERE id_usuario <> ?',[req.user.id_usuario]);
   res.render('ofertas/listOfertas', { ofertas });
@@ -67,6 +66,25 @@ router.get('/perfilofertante/:id/:idO', isLoggedin, async (req, res) => {
   const perfil = await pool.query('SELECT * FROM usuarios WHERE id_usuario =  ?', [id]);
   const oferta = await pool.query('SELECT * FROM ofertas WHERE id_oferta = ?', [idO]);
   res.render('ofertas/perfilOfertante', {perfil: perfil[0] , oferta:oferta[0]});
+});
+
+router.post('/perfilofertante/:id/:idO', isLoggedin, async (req, res) => {
+  const { id, idO } = req.params;
+  const {tiempoOferta, solicitud_descripcion} = req.body;
+
+  const newSolicitud = {
+    "id_oferta": idO,
+    "id_usuario": req.user.id_usuario,
+    tiempoOferta,
+    solicitud_descripcion
+  };
+  await pool.query('INSERT INTO solicitudes set ?', [newSolicitud]);
+  req.flash('success', 'solicitud guardada exitosamente');
+  res.redirect('/ofertas/misolicitudes');
+});
+
+router.get('/misolicitudes', isLoggedin, async (req, res) => {
+  res.send("aqui se mostraran las solicitudes en proceso");
 });
 
 module.exports = router;

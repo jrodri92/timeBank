@@ -61,7 +61,7 @@ CREATE TABLE oferta_categoria(
 );
 
 CREATE TABLE tiempo (
-  id_tiempo INT NOT NULL,
+  id_tiempo INT NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
   valorTiempo INT NOT NULL,
   PRIMARY KEY(id_tiempo),
@@ -72,7 +72,7 @@ CREATE TABLE tiempo (
 );
 
 CREATE TABLE calificaciones (
-  id_calificacion INT NOT NULL,
+  id_calificacion INT NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
   valorCalificacion INT NOT NULL,
   PRIMARY KEY(id_calificacion),
@@ -83,7 +83,7 @@ CREATE TABLE calificaciones (
 );
 
 CREATE TABLE solicitudes (
-  id_solicitud INT NOT NULL,
+  id_solicitud INT NOT NULL AUTO_INCREMENT,
   id_oferta INT NOT NULL,
   id_usuario INT NOT NULL,
   tiempoOferta INT NOT NULL,
