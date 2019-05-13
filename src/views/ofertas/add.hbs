@@ -3,17 +3,23 @@
     <div class='ccol-md-4 mx-auto'>
       <div class="card" >
         <div class="card-body">
+          <h1> Agregar nueva oferta </h1>
           <form action="/ofertas/misofertas/add" method="POST">
             <div class="form-group">
               <input type='text' class="form-control" name="nombre_oferta" placeholder="Nombre" autofocus>
             </div>
-            <!--
-            <div class="form-group">
-              <input type="url" name="url" class = "form-control" placeholder="URL">
-            </div>
-            -->
             <div class="form-group">
               <textarea name="oferta_descripcion" rows="2" class="form-control" placeholder="Descripcion"></textarea>
+            </div>
+            <div class="form-group">
+                <select class="custom-select mr-sm-2" name= "categoria" id="rec_mode">
+                  <option selected> Categoría </option>
+                  {{categorias}}
+                  {{#each categorias}}
+                    <option value={{this.id_categoria}}>{{this.nombre}}</option>
+                  {{/each}}
+                </select>
+              
             </div>
             <div class="form-group" >
               <button class="btn btn-success btn-block">

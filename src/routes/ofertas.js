@@ -4,19 +4,27 @@ const router = express.Router();
 const pool = require('../database')
 const {isLoggedin} = require('../lib/auth');
 
-router.get('/misofertas/add', (req, res)=>{
-  res.render('ofertas/add');
+router.get('/misofertas/add', async(req, res)=>{
+  const categorias = await pool.query('SELECT * FROM categorias');
+  console.log(categorias[0]);
+  res.render('ofertas/add', {categorias: categorias});
 });
 
 router.post('/misofertas/add',isLoggedin, async (req,res) =>{
-  const { nombre_oferta, oferta_descripcion } = req.body;
-  const newLink = {
+  const { nombre_oferta, oferta_descripcion, categoria } = req.body;
+  const newOferta = {
     nombre_oferta, 
     oferta_descripcion,
     id_usuario: req.user.id_usuario
   };
-  console.log(newLink);
-  await pool.query('INSERT INTO ofertas set ?', [newLink]);
+
+  const oferta = await pool.query('INSERT INTO ofertas set ?', [newOferta]);
+  const newOferta_Categoria = {
+    id_oferta: oferta.insertId,
+    id_categoria: categoria
+  }
+  
+  await pool.query('INSERT INTO oferta_categoria set ?', [newOferta_Categoria]);
   req.flash('success', 'oferta saved successfully');
   res.redirect('/ofertas/misofertas');
 });
