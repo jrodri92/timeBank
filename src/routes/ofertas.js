@@ -15,7 +15,6 @@ router.post('/misofertas/add',isLoggedin, async (req,res) =>{
     oferta_descripcion,
     id_usuario: req.user.id_usuario
   };
-  console.log(newLink);
   await pool.query('INSERT INTO ofertas set ?', [newLink]);
   req.flash('success', 'oferta saved successfully');
   res.redirect('/ofertas/misofertas');
@@ -49,7 +48,6 @@ router.get('/misofertas/edit/:id',isLoggedin, async (req, res) => {
 router.post('/misofertas/edit/:id',isLoggedin, async(req, res) => {
   const { id } = req.params;
   const { nombre_oferta, descripcion } = req.body;
-  console.log(req.body);
   const newLink = {
     nombre_oferta, 
     "oferta_descripcion": descripcion,
@@ -70,7 +68,7 @@ router.get('/perfilofertante/:id/:idO', isLoggedin, async (req, res) => {
 
 router.post('/perfilofertante/:id/:idO', isLoggedin, async (req, res) => {
   const { id, idO } = req.params;
-  const {tiempoOferta, solicitud_descripcion} = req.body;
+  const { tiempoOferta, solicitud_descripcion } = req.body;
 
   const newSolicitud = {
     "id_oferta": idO,
@@ -78,13 +76,17 @@ router.post('/perfilofertante/:id/:idO', isLoggedin, async (req, res) => {
     tiempoOferta,
     solicitud_descripcion
   };
-  await pool.query('INSERT INTO solicitudes set ?', [newSolicitud]);
-  req.flash('success', 'solicitud guardada exitosamente');
-  res.redirect('/ofertas/misolicitudes');
+
+  const tiempo = await pool.query('Select valorTiempo from tiempo where id_usuario = ?', [req.user.id_usuario]);
+  if (tiempoOferta <= tiempo[0].valorTiempo) {
+    await pool.query('INSERT INTO solicitudes set ?', [newSolicitud]);
+    req.flash('success', 'solicitud guardada exitosamenteee');
+    res.redirect('/solicitudes/solicitadas');
+  } else {
+    req.flash('success', 'No tienes el tiempo suficiente');
+    res.redirect('/solicitudes/solicitadas');
+  }
 });
 
-router.get('/misolicitudes', isLoggedin, async (req, res) => {
-  res.send("aqui se mostraran las solicitudes en proceso");
-});
 
 module.exports = router;
