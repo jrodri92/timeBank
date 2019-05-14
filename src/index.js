@@ -37,7 +37,6 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 //Global variable
 app.use((req, res, next) => {
   app.locals.success = req.flash('success');
@@ -52,7 +51,7 @@ app.use(require('./routes/authentication.js'))
 app.use('/links', require('./routes/links.js'))
 app.use('/ofertas', require('./routes/ofertas.js'))
 app.use('/categorias', require('./routes/categoria.js'))
-
+app.use('/solicitudes', require('./routes/solicitudes.js'))
 //public
 app.use(express.static(path.join(__dirname, 'public')));
 
