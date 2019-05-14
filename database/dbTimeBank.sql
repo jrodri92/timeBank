@@ -44,6 +44,7 @@ CREATE TABLE categorias(
   categoria_descripcion VARCHAR(200) NOT NULL,
   PRIMARY KEY (id_categoria)
 );
+ALTER TABLE categorias ADD COLUMN nombre VARCHAR(100) AFTER id_categoria;
 
 CREATE TABLE oferta_categoria(
   id_oferta_categoria INT NOT NULL AUTO_INCREMENT,
