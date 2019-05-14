@@ -14,9 +14,22 @@
           <p class="m-2">{{oferta_descripcion}}</p>
           <p>{{timeago fechaCreacion}}</p>
           <a href="/ofertas/perfilofertante/{{id_usuario}}/{{id_oferta}}" class="btn btn-danger">Ver más</a>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"
-            data-whatever="@mdo">Solicitar</button>
-          <!-- <a href="/ofertas/edit/{{id}}" class="btn btn-secondary">Solicitar</a> -->
+          <!--
+          <form id="subscribe-email-form" action="/solicitudes/solicitar/{{id_usuario}}/{{id_oferta}}" method="post">
+            <label for="recipient-name" class="col-form-label">Horas que necesitas:</label>
+            <input type="text" class="form-control" name="tiempoOferta">
+            <div class="modal-body">
+              <label for="message-text" class="col-form-label">Descripción:</label>
+            <textarea class="form-control" name="solicitud_descripcion"></textarea>
+            </div>
+            <div class="modal-footer">
+              <input id="subscribe-email-submit" type="submit" value="SUBMIT" class="btn" />
+            </div>
+          </form>
+          -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+              data-whatever="@mdo">Solicitar</button>
+
         </div>
       </div>
     </div>
@@ -31,7 +44,6 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -43,33 +55,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="subscribe-email-form" action="/solicitudes/solicitar/{{id_usuario}}/{{id_oferta}}" method="post">
+        <!--<form method="POST">-->
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Horas que necesitas:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" name="tiempoOferta">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Descripción:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" name="solicitud_descripcion"></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="summit" class="btn btn-primary" onclick="holi"> Aceptar</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" >Solicitar</button>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  $('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('whatever') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-title').text('New message to ' + recipient)
-    modal.find('.modal-body input').val(recipient)
-  })
-</script>

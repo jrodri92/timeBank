@@ -3,15 +3,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <div class="container portfolio">
-  <!--
-    <div class="row">
-		<div class="col-md-12">
-			<div class="heading">				
-				<img src="https://image.ibb.co/cbCMvA/logo.png" />
-			</div>
-		</div>	
-	</div>
-    -->
   <div class="bio-info">
     <div class="row">
       <div class="col-md-6">
@@ -49,7 +40,8 @@
           <h6>{{timeago oferta.fechaCreacion}}</h6>
           <h6>{{oferta.oferta_descripcion}}</h6>
           <div class="text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Solicitar</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+              data-whatever="@mdo">Solicitar</button>
           </div>
         </div>
       </div>
@@ -57,7 +49,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -67,6 +60,7 @@
         </button>
       </div>
       <div class="modal-body">
+        <!--<form id="subscribe-email-form" action="/solicitudes/solicitar/{{id_usuario}}/{{id_oferta}}" method="post">-->
         <form method="POST">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Horas que necesitas:</label>

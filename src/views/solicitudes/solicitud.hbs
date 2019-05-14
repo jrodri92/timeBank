@@ -1,0 +1,78 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container portfolio">
+    <!--
+    <div class="row">
+		<div class="col-md-12">
+			<div class="heading">				
+				<img src="https://image.ibb.co/cbCMvA/logo.png" />
+			</div>
+		</div>	
+	</div>
+    -->
+    <div class="bio-info">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="bio-content">
+
+                    <h2>Hola, Soy {{nombres}} {{apellidos}} y he solicitado {{tiempoOferta}} horas de tu oferta
+                        {{nombre_oferta}}</h2>
+                    <h4><strong>Correo:</strong> {{email}}</h4>
+                    <h4><strong>Celular</strong> {{celular}}</h4>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="bio-image">
+                            <img src="https://image.ibb.co/f5Kehq/bio-image.jpg" alt="image" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="bio-info">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Verificada</p>
+                        <p>Calificacion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="bio-content">
+                    <h4>{{solicitud_descripcion}}</h4>
+                    <h6>{{timeago fechaSolicitud}}</h6>
+
+                    <!--  
+          <p>{{oferta.nombre_oferta}}</p>
+          
+          -->
+                    <div class="text-right">
+                        {{#if estadoSolicitud}}
+
+                        <form method="POST" action="/solicitudes/confirmar/{{id_solicitud}}">
+                            <!--<input type='text' value="{{oferta.nombre_oferta}}" class="form-control" name="nombre_oferta" placeholder="Nombre" autofocus>-->
+                            <button type="submit" class="btn btn-secondary">Confirmar</button>
+                        </form>
+
+
+                        {{else}}
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"
+                            data-whatever="@mdo">Terminar</button>
+                        {{/if}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
