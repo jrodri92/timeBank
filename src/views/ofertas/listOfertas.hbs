@@ -13,22 +13,9 @@
           </a>
           <p class="m-2">{{oferta_descripcion}}</p>
           <p>{{timeago fechaCreacion}}</p>
-          <a href="/ofertas/perfilofertante/{{id_usuario}}/{{id_oferta}}" class="btn btn-danger">Ver más</a>
-          <!--
-          <form id="subscribe-email-form" action="/solicitudes/solicitar/{{id_usuario}}/{{id_oferta}}" method="post">
-            <label for="recipient-name" class="col-form-label">Horas que necesitas:</label>
-            <input type="text" class="form-control" name="tiempoOferta">
-            <div class="modal-body">
-              <label for="message-text" class="col-form-label">Descripción:</label>
-            <textarea class="form-control" name="solicitud_descripcion"></textarea>
-            </div>
-            <div class="modal-footer">
-              <input id="subscribe-email-submit" type="submit" value="SUBMIT" class="btn" />
-            </div>
-          </form>
-          -->
+          <!--<a href="/ofertas/perfilofertante/{{id_usuario}}/{{id_oferta}}" class="btn btn-danger">Ver más</a>-->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-              data-whatever="@mdo">Solicitar</button>
+            data-whatever="@mdo">Solicitar</button>
 
         </div>
       </div>
@@ -37,7 +24,6 @@
     <div class="col-md-4 mx-auto">
       <div class="card card-body text-center">
         <p> No hay ofertas todavia para ti </p>
-        <!-- <a href="/ofertas/add"> Crea uno! </a> -->
       </div>
     </div>
     {{/each}}
@@ -56,7 +42,6 @@
       </div>
       <div class="modal-body">
         <form id="subscribe-email-form" action="/solicitudes/solicitar/{{id_usuario}}/{{id_oferta}}" method="post">
-        <!--<form method="POST">-->
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Horas que necesitas:</label>
             <input type="text" class="form-control" name="tiempoOferta">
