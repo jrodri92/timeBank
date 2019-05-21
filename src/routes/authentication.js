@@ -27,8 +27,10 @@ router.post('/signin', isNotLoggedIn, (req, res, next) => {
   })(req,res,next);
 });
 
-router.get('/profile',isLoggedin, (req, res) => {
-  res.render('profile');
+router.get('/profile',isLoggedin, async(req, res) => {
+  const user = res.req.user;
+  const tiempo = await pool.query('SELECT valorTiempo FROM tiempo WHERE id_usuario = ?', [user.id_usuario]);
+  res.render('profile',{tiempo: tiempo[0].valorTiempo, user});
 });
 
 router.get('/logout', isLoggedin, (req, res) => {

@@ -1,13 +1,12 @@
 <div class="container p-4">
     <div class="row">
         <div class="col-md-4 mx-auto">
-            <div class="card text-center">
+            <div class="card" style="width: 18rem;">
+                <img src="https://image.ibb.co/f5Kehq/bio-image.jpg" class="card-img-top" >
                 <div class="card-body">
-                    <h3>Welcome {{user.fullname}}</h3>
-                    <h4>{{user.username}}</h4>
-                    <a href="#" class="btn btn-primary m-4">
-                        Crea una oferta
-                    </a>
+                    <h5 class="card-title">{{user.nombres}} {{user.apellidos}}</h5>
+                    <p class="card-text">Tiempo disponible {{tiempo}} horas</p>
+                    <a href="/ofertas/misofertas/add" class="btn btn-primary">Crear oferta</a>
                 </div>
             </div>
         </div>

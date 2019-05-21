@@ -36,12 +36,18 @@
         <li class="nav-item">
           <a href="/categorias" class="nav-link">Categorias</a>
         </li>
-        
-        <li class="nav-item">
-          <a href="/profile" class="nav-link">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a href="/logout" class="nav-link">Logout</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Usuario
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/profile">Perfil</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/modificar">Modificar perfil</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+          </div>
         </li>
 
         {{else}}
