@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../database')
 
 const passport = require('passport');
 const {isLoggedin, isNotLoggedIn} = require('../lib/auth');
@@ -33,6 +34,29 @@ router.get('/profile',isLoggedin, (req, res) => {
 router.get('/logout', isLoggedin, (req, res) => {
    req.logOut();
    res.redirect('/signin');
+});
+
+router.get('/modificar', isLoggedin, (req,res) => {
+  res.render('auth/modificar',{ user: res.req.user});
+});
+
+router.post('/modificar', isLoggedin, async(req,res) => {
+  const id = res.req.user.id_usuario;
+  const { cedula, nombres,apellidos, email, 
+    telefono,celular,
+    user_description,frase } = req.body;
+
+  const newUser = { 
+    cedula, nombres,apellidos, email, 
+    telefono,celular,
+    user_description,frase 
+  };
+  console.log(id);
+  console.log(newUser)
+  await pool.query('UPDATE usuarios set ? WHERE id_usuario = ?', [newUser, id]);
+  req.flash('success', 'link updated successfully');
+
+  res.redirect('profile');
 });
 
 module.exports = router;

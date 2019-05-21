@@ -112,3 +112,17 @@ CREATE TABLE transacciones (
   ON DELETE CASCADE
   ON UPDATE CASCADE 
 );
+
+--insersiones
+INSERT INTO `timeitBank`.`categorias` (`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES (1,"aseo","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(2,"belleza","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(3,"cocina","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(4,"educacion","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(5,"reparacion","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(6,"tecnologia","");
