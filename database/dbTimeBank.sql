@@ -7,6 +7,8 @@ CREATE DATABASE timeitBank;
 
 use timeitBank;
 
+use 
+
 -- creating tables
 CREATE TABLE usuarios (
   id_usuario INT NOT NULL AUTO_INCREMENT, 
@@ -132,15 +134,15 @@ CREATE TABLE seguroTiempo (
   ON UPDATE CASCADE 
 );
 
-INSERT INTO `timeitBank`.`categorias` (`id_categoria`,`nombre`,`categoria_descripcion`)
+INSERT INTO `categorias` (`id_categoria`,`nombre`,`categoria_descripcion`)
 VALUES (1,"aseo","");
-INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+INSERT INTO `categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
 VALUES(2,"belleza","");
-INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+INSERT INTO `categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
 VALUES(3,"cocina","");
-INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+INSERT INTO `categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
 VALUES(4,"educacion","");
-INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+INSERT INTO `categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
 VALUES(5,"reparacion","");
-INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+INSERT INTO `categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
 VALUES(6,"tecnologia","");
