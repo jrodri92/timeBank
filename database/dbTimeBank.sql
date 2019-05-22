@@ -112,8 +112,6 @@ CREATE TABLE transacciones (
   ON DELETE CASCADE
   ON UPDATE CASCADE 
 );
-
-
 CREATE TABLE seguroTiempo (
   id_seguro INT NOT NULL AUTO_INCREMENT,
   id_solicitud INT NOT NULL,
@@ -124,3 +122,16 @@ CREATE TABLE seguroTiempo (
   ON DELETE CASCADE
   ON UPDATE CASCADE 
 );
+
+INSERT INTO `timeitBank`.`categorias` (`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES (1,"aseo","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(2,"belleza","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(3,"cocina","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(4,"educacion","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(5,"reparacion","");
+INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
+VALUES(6,"tecnologia","");

@@ -1,0 +1,49 @@
+<div class="container p-4">
+  <div class="row">
+    <div class="col-md-5 mx-auto">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Editar perfil</h3>
+        </div>
+        <div class="card-body">
+          <form action="/modificar" method="POST">
+            <div class="form-group">
+              <input type="text" name="nombres" placeholder="Nombres" value= "{{user.nombres}}" class="form-control"  autofocus>
+            </div>
+            <div class="form-group">
+              <input type="text" name="apellidos" placeholder="Apellidos" value="{{user.apellidos}}"  class="form-control" autofocus>
+            </div>
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Nombre de usuario" value="{{user.username}}" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="number" name="cedula" placeholder="Cédula" value="{{user.cedula}}" class="form-control" autofocus>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Correo electrónico"  value="{{user.email}}"class="form-control">
+            </div>
+
+            <div class="form-group">
+              <input type="tel" name="telefono" placeholder="Teléfono" value="{{user.telefono}}" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" name="celular" placeholder="celular" value="{{user.celular}}" class="form-control">
+            </div>
+            <div class="form-group">
+              <textarea type="text" class="form-control" name="user_description" placeholder="Descripción de usuario">{{user.user_description}}</textarea>
+            </div>
+            <div class="form-group">
+              <input type="textarea" name="frase" placeholder="Frase"  value="{{user.frase}}" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-success btn-block">
+                Editar perfil
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
