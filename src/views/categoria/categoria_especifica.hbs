@@ -24,7 +24,6 @@
     <div class="col-md-4 mx-auto">
       <div class="card card-body text-center">
         <p> No hay ofertas todavia para ti </p>
-        <!-- <a href="/ofertas/add"> Crea uno! </a> -->
       </div>
     </div>
     {{/each}}
@@ -43,7 +42,6 @@
       </div>
       <div class="modal-body">
         <form id="subscribe-email-form" action="/solicitudes/solicitar/{{id_usuario}}/{{id_oferta}}" method="post">
-        <!--<form method="POST">-->
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Horas que necesitas:</label>
             <input type="text" class="form-control" name="tiempoOferta">

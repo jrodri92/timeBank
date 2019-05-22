@@ -123,10 +123,11 @@ CREATE TABLE transacciones (
 CREATE TABLE seguroTiempo (
   id_seguro INT NOT NULL AUTO_INCREMENT,
   id_solicitud INT NOT NULL,
+  id_usuario INT NOT NULL,
   valorTiempo INT NOT NULL,
-  PRIMARY KEY(id_tiempo),
+  PRIMARY KEY(id_seguro),
   
-  CONSTRAINT fk_id_usuario_tiempo FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+  CONSTRAINT fk_id_usuario_seguroTiempo FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
   ON DELETE CASCADE
   ON UPDATE CASCADE 
 );

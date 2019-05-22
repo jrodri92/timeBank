@@ -53,8 +53,6 @@ router.post('/modificar', isLoggedin, async(req,res) => {
     telefono,celular,
     user_description,frase 
   };
-  console.log(id);
-  console.log(newUser)
   await pool.query('UPDATE usuarios set ? WHERE id_usuario = ?', [newUser, id]);
   req.flash('success', 'link updated successfully');
 

@@ -86,11 +86,9 @@ router.post('/perfilofertante/:id/:idO', isLoggedin, async (req, res) => {
   };
 
   const tiempo = await pool.query('Select valorTiempo from tiempo where id_usuario = ?', [req.user.id_usuario]);
-  console.log("nuevo tiempo ");
   if (tiempoOferta <= tiempo[0].valorTiempo) {
     nuevoTiempo = tiempo[0].valorTiempo - tiempoOferta;
     await pool.query('UPDATE tiempo set valortiempo = ? WHERE id_usuario = ?', [nuevoTiempo, req.user.id_usuario]);
-    console.log('UPDATE tiempo set valortiempo = ? WHERE id_usuario = ?', [nuevoTiempo, req.user.id_usuario]);
 
     await pool.query('INSERT INTO solicitudes set ?', [newSolicitud]);
     req.flash('success', 'solicitud guardada exitosamenteee');
