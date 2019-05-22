@@ -1,21 +1,29 @@
 {{#each solicitudes}}
 <div class="">
-    <a href="/ofertas/" class="list-group-item list-group-item-action"><strong>{{nombres}} {{apellidos}}</strong> ha
-        solicitado <strong>{{tiempoOferta}}</strong> horas de tu oferta <strong>{{nombre_oferta}}</strong></a>
-
-    {{#if estadoSolicitud}}
-
-    <form method="POST" action="/solicitudes/confirmar/{{id_solicitud}}">
-        <!--<input type='text' value="{{oferta.nombre_oferta}}" class="form-control" name="nombre_oferta" placeholder="Nombre" autofocus>-->
-        <button type="submit" class="btn btn-secondary">Confirmar</button>
+    <a href="/solicitudes/solicituduser/{{id_solicitud}}" class="list-group-item list-group-item-action">Has solicitado a <strong>{{nombres}}
+            {{apellidos}}</strong>
+        <strong>{{tiempoOferta}}</strong> horas de la oferta <strong>{{nombre_oferta}}</strong></a>
+    {{#ifCond estadoSolicitud '==' 0}}
+    <form method="POST" action="/solicitudes/cancelar/{{id_solicitud}}">
+        <button type="submit" class="btn btn-secondary">Cancelar</button>
     </form>
-
-
-    {{else}}
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@mdo">Terminar</button>
-    {{/if}}
-    <a href="/solicitudes/solicitud/{{id_solicitud}}" class="btn btn-danger">Ver más</a>
-    <!--{{id_usuario}}/{{id_oferta}}-->
+    {{/ifCond}}
+    {{#ifCond estadoSolicitud '==' 1}}
+        {{#ifCond estadoDos '==' 0}}
+            <form method="POST" action="/solicitudes/pagar/{{id_solicitud}}">
+                <button type="submit" class="btn btn-secondary">Pagar</button>
+            </form>
+        {{/ifCond}}
+        {{#ifCond estadoDos '==' 1}}
+            <ul>Esperando terminación</ul>
+        {{/ifCond}}
+    {{/ifCond}}
+    {{#ifCond estadoSolicitud '==' 2}}
+        {{#ifCond estadoDos '==' 0}}
+            <form method="POST" action="/solicitudes/pagar/{{id_solicitud}}">
+                <button type="submit" class="btn btn-secondary">Pagar</button>
+            </form>
+        {{/ifCond}}
+    {{/ifCond}}
 </div>
 {{/each}}

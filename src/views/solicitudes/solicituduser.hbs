@@ -3,25 +3,21 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <div class="container portfolio">
-    <!--
-    <div class="row">
-		<div class="col-md-12">
-			<div class="heading">				
-				<img src="https://image.ibb.co/cbCMvA/logo.png" />
-			</div>
-		</div>	
-	</div>
-    -->
     <div class="bio-info">
         <div class="row">
             <div class="col-md-6">
                 <div class="bio-content">
-
-                    <h2>Hola, Soy {{nombres}} {{apellidos}} y he solicitado {{tiempoOferta}} horas de tu oferta
+                    <h2>Solicitaste a {{nombres}} {{apellidos}}, {{tiempoOferta}} horas de la oferta
                         {{nombre_oferta}}</h2>
+
+                    {{#ifCond estadoSolicitud '==' 0}}
+                    <h4>Cuando tu solicitud sea confirmada aqui apareceran los datos del ofertante</h4>
+                    {{/ifCond}}
+
+                    {{#ifCond estadoSolicitud '==' 1}}
                     <h4><strong>Correo:</strong> {{email}}</h4>
                     <h4><strong>Celular</strong> {{celular}}</h4>
-
+                    {{/ifCond}}
                 </div>
             </div>
             <div class="col-md-6">
@@ -33,7 +29,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -53,30 +48,27 @@
                     <h6>{{timeago fechaSolicitud}}</h6>
 
                     <div class="text-right">
-                        <!--
-                        {{#if estadoSolicitud}}
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"
-                            data-whatever="@mdo">Terminar</button>
-                        {{else}}
-                        <form method="POST" action="/solicitudes/confirmar/{{id_solicitud}}">
-                            <button type="submit" class="btn btn-secondary">Confirmar</button>
-                        </form>
-                        {{/if}}
-                        -->
-                        {{#ifCond estadoSolicitud '==' 2}}
-                        <ul>Esperando Respuesta</ul>
-                        {{/ifCond}}
-
-                        {{#ifCond estadoSolicitud '==' 1}}
-                        <form method="POST" action="/solicitudes/terminar/{{id_solicitud}}">
-                            <button type="submit" class="btn btn-secondary">Terminar</button>
-                        </form>
-                        {{/ifCond}}
-
                         {{#ifCond estadoSolicitud '==' 0}}
-                        <form method="POST" action="/solicitudes/confirmar/{{id_solicitud}}">
-                            <button type="submit" class="btn btn-secondary">Confirmar</button>
+                        <form method="POST" action="/solicitudes/cancelar/{{id_solicitud}}">
+                            <button type="submit" class="btn btn-secondary">Cancelar</button>
                         </form>
+                        {{/ifCond}}
+                        {{#ifCond estadoSolicitud '==' 1}}
+                        {{#ifCond estadoDos '==' 0}}
+                        <form method="POST" action="/solicitudes/pagar/{{id_solicitud}}">
+                            <button type="submit" class="btn btn-secondary">Pagar</button>
+                        </form>
+                        {{/ifCond}}
+                        {{#ifCond estadoDos '==' 1}}
+                        <ul>Esperando terminación</ul>
+                        {{/ifCond}}
+                        {{/ifCond}}
+                        {{#ifCond estadoSolicitud '==' 2}}
+                        {{#ifCond estadoDos '==' 0}}
+                        <form method="POST" action="/solicitudes/pagar/{{id_solicitud}}">
+                            <button type="submit" class="btn btn-secondary">Pagar</button>
+                        </form>
+                        {{/ifCond}}
                         {{/ifCond}}
 
                     </div>

@@ -112,8 +112,17 @@ CREATE TABLE transacciones (
   ON DELETE CASCADE
   ON UPDATE CASCADE 
 );
+CREATE TABLE seguroTiempo (
+  id_seguro INT NOT NULL AUTO_INCREMENT,
+  id_solicitud INT NOT NULL,
+  valorTiempo INT NOT NULL,
+  PRIMARY KEY(id_tiempo),
+  
+  CONSTRAINT fk_id_usuario_tiempo FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE 
+);
 
---insersiones
 INSERT INTO `timeitBank`.`categorias` (`id_categoria`,`nombre`,`categoria_descripcion`)
 VALUES (1,"aseo","");
 INSERT INTO `timeitBank`.`categorias`(`id_categoria`,`nombre`,`categoria_descripcion`)
