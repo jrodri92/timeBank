@@ -91,6 +91,7 @@ CREATE TABLE solicitudes (
   solicitud_descripcion VARCHAR(400) NOT NULL,
   estadoSolicitud BOOLEAN,
   fechaSolicitud TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  estadoDos INT NOT NULL,
   PRIMARY KEY(id_solicitud),
   
   CONSTRAINT fk_id_usuario_solicitud FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
@@ -104,11 +105,18 @@ CREATE TABLE solicitudes (
 
 CREATE TABLE transacciones (
   id_transaccion INT NOT NULL AUTO_INCREMENT,
-  id_solicitud INT NOT NULL,
+  nombreOferta VARCHAR(45) NOT NULL,
+  id_ofertante INT NOT NULL,
+  id_solicitante INT NOT NULL,
+  tiempoSolicitado INT NOT NULL,
+  tiempoAnterior INT NOT NULL,
+  tiempoNuevo INT NOT NULL,
+  nombres VARCHAR(45) NOT NULL,
+  apellidos VARCHAR(45) NOT NULL,
   fechaTransaccion TIMESTAMP NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (id_transaccion),
   
-  CONSTRAINT fk_id_solicitud FOREIGN KEY (id_solicitud) REFERENCES solicitudes(id_solicitud)
+  CONSTRAINT fk_id_ofertante FOREIGN KEY (id_ofertante) REFERENCES usuarios(id_usuario)
   ON DELETE CASCADE
   ON UPDATE CASCADE 
 );

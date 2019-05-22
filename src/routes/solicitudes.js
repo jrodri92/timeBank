@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../database')
 const { isLoggedin } = require('../lib/auth');
 
+
 router.get('/solicitadas', isLoggedin, async (req, res) => {
   const solicitudes = await pool.query('Select id_solicitud, nombres, apellidos, nombre_oferta, tiempoOferta, estadoSolicitud, estadoDos from solicitudes s inner join ofertas o on s.id_oferta = o.id_oferta inner join usuarios u on o.id_usuario = u.id_usuario where s.id_usuario = ?', [req.user.id_usuario]);
   res.render('solicitudes/solicitadas', { solicitudes });
@@ -35,6 +36,10 @@ router.post('/pagar/:id', isLoggedin, async (req, res) => {
     // actualiza el tiempo del ofertante
     await pool.query('UPDATE tiempo set valorTiempo = ? WHERE id_usuario = ?', [nuevoTiempo, usuario[0].id_usuario]);
     // Borra la solicitud
+
+    const datos = await pool.query('select nombre_oferta, o.id_usuario as "id_ofertante", s.id_usuario as "id_solicitante", tiempoOferta as "tiempoSolicitado", nombres, apellidos from solicitudes s inner join ofertas o on s.id_oferta = o.id_oferta inner join usuarios u on s.id_usuario = u.id_usuario where id_solicitud = ?', [id]);
+    await pool.query('INSERT INTO transacciones (nombreOferta, id_ofertante , id_solicitante, tiempoSolicitado, tiempoAnterior, tiempoNuevo, nombres, apellidos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [datos[0].nombre_oferta, datos[0].id_ofertante, datos[0].id_solicitante, datos[0].tiempoSolicitado, tiempo[0].valorTiempo, nuevoTiempo, datos[0].nombres, datos[0].apellidos]);
+    
     await pool.query('DELETE FROM solicitudes WHERE id_solicitud = ?', [id]);
     req.flash('success', 'Transacción Exito!, tu tiempo sera depositado');
     res.redirect('/solicitudes/solicitadas/');
@@ -63,7 +68,12 @@ router.post('/terminar/:id', isLoggedin, async (req, res) => {
     tiempoSolicitud = await pool.query('SELECT tiempoOferta from solicitudes where id_solicitud = ?', [id]);
     nuevoTiempo = tiempo[0].valorTiempo + tiempoSolicitud[0].tiempoOferta;
     await pool.query('UPDATE tiempo set valorTiempo = ? WHERE id_usuario = ?', [nuevoTiempo, req.user.id_usuario]);
+    
+    const datos = await pool.query('select nombre_oferta, o.id_usuario as "id_ofertante", s.id_usuario as "id_solicitante", tiempoOferta as "tiempoSolicitado", nombres, apellidos from solicitudes s inner join ofertas o on s.id_oferta = o.id_oferta inner join usuarios u on s.id_usuario = u.id_usuario where id_solicitud = ?', [id]);
+    await pool.query('INSERT INTO transacciones (nombreOferta, id_ofertante , id_solicitante, tiempoSolicitado, tiempoAnterior, tiempoNuevo, nombres, apellidos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [datos[0].nombre_oferta, datos[0].id_ofertante, datos[0].id_solicitante, datos[0].tiempoSolicitado, tiempo[0].valorTiempo, nuevoTiempo, datos[0].nombres, datos[0].apellidos]);
+    
     await pool.query('DELETE FROM solicitudes WHERE id_solicitud = ?', [id]);
+    
     req.flash('success', 'Has terminado con exito, tu tiempo sera debitado');
     res.redirect('/solicitudes/ofrecidas/');
   }  
@@ -129,6 +139,11 @@ router.get('/solicituduser/:id', isLoggedin, async (req, res) => {
   
   //const solicitudes = await pool.query('Select s.id_usuario, id_solicitud, fechaSolicitud, email, celular, nombres, apellidos, nombre_oferta, tiempoOferta, estadoSolicitud, solicitud_descripcion from solicitudes s inner join usuarios u on s.id_usuario = u.id_usuario inner join ofertas o on s.id_oferta = o.id_oferta where id_solicitud = ?', [id]);
   res.render('solicitudes/solicitud', solicitudes[0]);
+});
+
+router.get('/transacciones', isLoggedin, async (req, res) => {
+  const transacciones = await pool.query('Select * from transacciones where id_ofertante = ?', [req.user.id_usuario]);
+  res.render('solicitudes/transacciones', { transacciones });
 });
 
 module.exports = router;

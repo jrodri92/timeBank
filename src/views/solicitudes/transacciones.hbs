@@ -1,0 +1,30 @@
+<div class="container p-4">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Oferta</th>
+                    <th scope="col">Solicitante</th>
+                    <th scope="col">Tiempo Solicitado</th>
+                    <th scope="col">Tiempo Anterior</th>
+                    <th scope="col">Tiempo Nuevo</th>
+                    
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each transacciones}}
+                <tr>
+                    <td>{{fechaTransaccion}}</td>
+                    <td>{{nombreOferta}}</td>
+                    <td>{{nombres}} {{apellidos}}</td>
+                    <td>{{tiempoSolicitado}}</td>
+                    <td>{{tiempoAnterior}}</td>
+                    <td>{{tiempoNuevo}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

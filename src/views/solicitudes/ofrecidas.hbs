@@ -1,18 +1,20 @@
-{{#each solicitudes}}
-<div class="">
-    <a href="/solicitudes/solicitud/{{id_solicitud}}" class="list-group-item list-group-item-action"><strong>{{nombres}}
-            {{apellidos}}</strong> ha
-        solicitado <strong>{{tiempoOferta}}</strong> horas de tu oferta <strong>{{nombre_oferta}}</strong></a>
+<div class="container p-4">
+    {{#each solicitudes}}
+    <div class="">
+        <a href="/solicitudes/solicitud/{{id_solicitud}}"
+            class="list-group-item list-group-item-action"><strong>{{nombres}}
+                {{apellidos}}</strong> ha
+            solicitado <strong>{{tiempoOferta}}</strong> horas de tu oferta <strong>{{nombre_oferta}}</strong></a>
 
-    {{#if estadoSolicitud}}
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@mdo">Terminar</button>
-    {{else}}
-    <form method="POST" action="/solicitudes/confirmar/{{id_solicitud}}">
-        <button type="submit" class="btn btn-secondary">Confirmar</button>
-    </form>
+        {{#if estadoSolicitud}}
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"
+            data-whatever="@mdo">Terminar</button>
+        {{else}}
+        <form method="POST" action="/solicitudes/confirmar/{{id_solicitud}}">
+            <button type="submit" class="btn btn-secondary">Confirmar</button>
+        </form>
 
-    {{/if}}
-    <!--<a href="/solicitudes/solicitud/{{id_solicitud}}" class="btn btn-danger">Ver más</a>-->
+        {{/if}}
+    </div>
+    {{/each}}
 </div>
-{{/each}}
